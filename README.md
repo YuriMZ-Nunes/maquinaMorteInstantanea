@@ -45,6 +45,11 @@ Guia GIT: http://rogerdudler.github.io/git-guide/index.pt_BR.html (esse é foda)
 - **Enviar código**:
   Para enviar sua parte do código sempre verifique se está na branch **CORRETAAAAAAAA**.  
   Ao editar o código já irá aparecer no **Source Control** os arquivos para enviar.  
-  Quando terminar o que tinha que fazer é só escrever o que fez na mensagem e clicar em **Commit** e o resto deixa comigo 🫡  
-  A principio é isso ae qqr duvida é só chamar eh us guri  
+  Quando terminar o que tinha que fazer é só escrever o que fez na mensagem e clicar em **Commit** e o resto deixa comigo 🫡
+
+  Aaah ja ia me esquecendo.. **sempre** crie uma nova branch para novas tarefas.  
+  Então assim, exemplo: fulano vai fazer a interface grafica.  
+  Então voce fulano, vai abrir uma branch nova, vai fazer a interface grafica, e quando acabar, faz o commit e cabô papai.
+
+  A principio é isso ae, com o tempo vamos acertando direitinho como usar isso aqui melhor e qqr duvida é só chamar eh us guri  
   ![mortemortemortemortemorte](https://i.pinimg.com/1200x/f7/c3/ca/f7c3ca6460fbc7112026e502993ac2f0.jpg)
