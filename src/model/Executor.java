@@ -18,13 +18,52 @@ public class Executor {
             // int reg = (instruction & REG_MASK) >> 8;
 
             switch(opCode) {
-                case 0x18:
+                case 0x18: // ADD
                     computer.registers[0] += operand;
+                    break;
+                case 0x90: // ADDR
+                    
+                    break;
+                case 0x40: // AND
+                    computer.registers[0] = computer.registers[0] & operand;
+                    break;
+                case 0x04:
+                    
+                    break;
+                case 0x28:
+                    
+                    break;
+                case 0xA0:
+                    
                     break;
                 case 0x3C:
                     pc = operand - 1;
                     break;
-                case 0x00:
+                case 0x30:
+                    
+                    break;
+                case 0x34:
+                    
+                    break;
+                case 0x38:
+                    
+                    break;
+                case 0x48:
+                    
+                    break;
+                case 0x1C:
+                    
+                    break;
+                case 0x94:
+                    
+                    break;
+                case 0x2C:
+                    
+                    break;
+                case 0xB8:
+                    
+                    break;
+                case 0x99:
                     System.out.println("Valor final: " + computer.registers[0]);
                     isRunning = false;
                     break;

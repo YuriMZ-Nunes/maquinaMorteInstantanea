@@ -2,6 +2,9 @@ package controller;
 public class Computer {
     public int[] memory;
     public int[] registers;
+    public int r1 = 0;
+    public int r2 = 0;
+
 
     public Computer(int memorySize){
         memory = new int[memorySize];
@@ -23,6 +26,23 @@ public class Computer {
         else 
             System.err.println("Erro: Endereço invalido: " + address);
     }
+
+    public void setRegisterR1(int value){
+        this.r1 = value;
+    }
+
+    public void setRegisterR2(int value){
+        this.r2 = value;
+    }
+
+    public int getRegisterR1(){
+        return r1;
+    }
+
+    public int getRegisterR2(){
+        return r2;
+    }
+
 
     
 }
