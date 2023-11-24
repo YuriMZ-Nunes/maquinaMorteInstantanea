@@ -17,10 +17,32 @@ public class InterfaceSwing extends JFrame {
         setLayout(new GridLayout(2, 2)); // Usando GridLayout com 2 linhas e 2 colunas
 
         // Painel superior esquerdo com um botão "Carregar"
-        JPanel panelSuperiorEsquerdo = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton btnCarregar = new JButton("Carregar");
-        panelSuperiorEsquerdo.add(btnCarregar);
+        GridBagLayout gbl = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbl.rowHeights = new int[] { 50, 30, 10 };
+        //gbl.columnWidths = new int[] { 100, 100, 100 };
+        JPanel panelSuperiorEsquerdo = new JPanel();
         panelSuperiorEsquerdo.setBorder(BorderFactory.createTitledBorder("Arquivo"));
+        panelSuperiorEsquerdo.setLayout(gbl);
+
+        JButton btnCarregar = new JButton("Carregar");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        panelSuperiorEsquerdo.add(btnCarregar, gbc);
+        
+        JButton btnExecutar = new JButton("Executar");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panelSuperiorEsquerdo.add(btnExecutar, gbc);
+
+        JTextField textFieldInput = new JTextField();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        //gbc.gridwidth = 2;
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
+        textFieldInput.setSize(50, 50);
+        panelSuperiorEsquerdo.add(textFieldInput, gbc);
 
         // Painel superior direito com o valor de 5 variáveis
         JPanel panelSuperiorDireito = new JPanel(new GridLayout(5, 2));
@@ -42,10 +64,7 @@ public class InterfaceSwing extends JFrame {
             panelSuperiorDireito.add(registerValues[i]);
         }
         
-        // Painel inferior esquerdo com um campo de texto para endereços de memória
         JPanel panelInferiorEsquerdo = new JPanel();
-        JTextArea textAreaInput = new JTextArea();
-        panelInferiorEsquerdo.add(textAreaInput);
         /*JTextArea textAreaEnderecos = new JTextArea(10, 20);
         panelInferiorEsquerdo.add(new JScrollPane(textAreaEnderecos));*/
 
@@ -65,7 +84,7 @@ public class InterfaceSwing extends JFrame {
         add(panelSuperiorDireito);
         add(panelInferiorEsquerdo);
         add(panelInferiorDireito);
-
+        /* 
         // Ação do botão "Carregar"
         btnCarregar.addActionListener(new ActionListener() {
             @Override
@@ -90,7 +109,7 @@ public class InterfaceSwing extends JFrame {
                 
             //JOptionPane.showMessageDialog(InterfaceSwing.this, "Botão Carregar pressionado!");
             }
-        });
+        });*/
     }
 
     public static void main(String[] args) {
