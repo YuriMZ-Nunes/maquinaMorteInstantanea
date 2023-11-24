@@ -1,26 +1,26 @@
 package controller;
 public class Computer {
-    public int[] memory;
+    public String[] memory;
     public int[] registers;
     public int r1 = 0;
     public int r2 = 0;
 
 
     public Computer(int memorySize){
-        memory = new int[memorySize];
+        memory = new String[memorySize];
         registers  = new int[7];
     }
 
-    public int readMemory(int address){
+    public String readMemory(int address){
         if (address >= 0 && address < memory.length){
             return memory[address];
         } else {
             System.err.println("Erro: Endereço invalido: " + address);
-            return 0;
+            return "-100";
         }
     }
 
-    public void writeMemory(int address, int value){
+    public void writeMemory(int address, String value){
         if (address >= 0 && address < memory.length)
             memory[address] = value;
         else 
