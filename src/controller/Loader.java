@@ -10,8 +10,7 @@ public class Loader {
         int address = 0;
 
         while((line = reader.readLine()) != null){
-            int instruction = Integer.parseInt(line, 16);
-            computer.writeMemory(address, instruction);
+            computer.writeMemory(address, line);
             address++;
         }
 
