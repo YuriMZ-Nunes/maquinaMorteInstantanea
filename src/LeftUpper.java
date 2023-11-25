@@ -42,6 +42,7 @@ public class LeftUpper {
             scrollPane.setPreferredSize(new Dimension(50, 200));
         panel.add(scrollPane, gbc);
         configureLoadAction(btnLoad, btnExec, textAreaInput);
+        configureExecAction(btnExec, textAreaInput);
     }
     
     private static void configureLoadAction(JButton btnLoad, JButton btnExec, JTextArea textAreaInput){
@@ -65,6 +66,17 @@ public class LeftUpper {
                     catch (IOException exception) {
                         System.out.println("Error: " + exception.getMessage());
                     }
+                }
+            }
+        });
+    }
+
+    private static void configureExecAction(JButton btnExec, JTextArea textAreaInput){
+        btnExec.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String line : textAreaInput.getText().split("\n")) {
+                    System.out.println(line);
                 }
             }
         });
