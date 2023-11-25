@@ -34,11 +34,11 @@ public class Executor{
     public static void executeProgram(Computer computer){
         
         int pc = 0;
-        computer.writeRegister("SW", pc);
+        computer.writeRegister("PC", pc);
         boolean isRunning = true;
         
         while (isRunning) {
-            pc = computer.readRegister("SW");
+            pc = computer.readRegister("PC");
             String instruction = computer.readInstructionsMemory(pc);
             int instructionSize = getInstructionSize(instruction);
             
