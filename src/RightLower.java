@@ -6,30 +6,22 @@ public class RightLower {
 
     public static void configure(JPanel panel) {
         panel.setBorder(BorderFactory.createTitledBorder("Memória"));
-        // Criação do modelo de tabela
-        DefaultTableModel modeloTabela = new DefaultTableModel();
-        modeloTabela.addColumn("Endereço");
-        modeloTabela.addColumn("Valor");
 
-        // Adicionando Exemplo de tabela preenchida
+        DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Endereço");
+            model.addColumn("Valor");
+
         for (int i = 0; i < 100; i++) 
-            modeloTabela.addRow(new Object[]{"0x00"+i, i+1024+""+i+128});
-        
-        // Criação da tabela com o modelo
-        JTable tabela = new JTable(modeloTabela);
+            model.addRow(new Object[]{"0x00"+i, i+1024+""+i+128});
 
-        // Ajustando a largura da tabela
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(100); // Largura do Endereço de Memória
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(100); // Largura do Valor
+        JTable table = new JTable(model);
+            table.getColumnModel().getColumn(0).setPreferredWidth(100);
+            table.getColumnModel().getColumn(1).setPreferredWidth(100); 
 
-        // Adicionando a tabela a um JScrollPane com barra de rolagem vertical
-        JScrollPane scrollPane = new JScrollPane(tabela);
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        // Definindo o tamanho preferido da tabela para evitar que ela se expanda demais
-        tabela.setPreferredScrollableViewportSize(new Dimension(200, 175));
-
-        // Adicionando o JScrollPane ao painel fornecido
+        table.setPreferredScrollableViewportSize(new Dimension(200, 175));
         panel.add(scrollPane);
     }
 }

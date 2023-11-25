@@ -4,9 +4,10 @@ import java.awt.*;
 public class MainGUI extends JFrame {
 
     public MainGUI() {
-        setTitle("Interface GridBag Principal");
+        setTitle("Interface");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(new GridLayout(2,2));
 
         JPanel panel = new JPanel(new GridLayout(1,1));
