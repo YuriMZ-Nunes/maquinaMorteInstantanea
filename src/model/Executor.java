@@ -32,11 +32,14 @@ public class Executor{
     static int R2_MASK = 0x000F;
 
     public static void executeProgram(Computer computer){
+        
         int pc = 0;
+        computer.writeRegister("SW", pc);
         boolean isRunning = true;
-
+        
         while (isRunning) {
-            String instruction = computer.readMemory(pc);
+            pc = computer.readRegister("SW");
+            String instruction = computer.readInstructionsMemory(pc);
             int instructionSize = getInstructionSize(instruction);
             
             switch (instructionSize) {
@@ -58,12 +61,21 @@ public class Executor{
             }
 
             pc++;
+            computer.writeRegister("SW", pc);
         }
     }
 
     public static void runInstructionFormat1(Computer computer, String instruction){
         int instructionToInt = Integer.parseInt(instruction, 16);
         int opCode = (instructionToInt & OPCODE_8BITS_MASK) >> 8;
+
+        switch (opCode) {
+            case 0x18:
+                
+                break;
+            default:
+                break;
+        }
     }
 
     public static void runInstructionFormat2(Computer computer, String instruction){
@@ -72,11 +84,18 @@ public class Executor{
         int r1 = (instructionToInt & R1_MASK) >> 4;
         int r2 = instructionToInt & R1_MASK;
 
+        switch (opCode) {
+            case 0x18:
+                
+                break;
+            default:
+                break;
+        }
+
     }
 
     public static void runInstructionFormat3(Computer computer, String instruction){
         int instructionToInt = Integer.parseInt(instruction, 16);
-        int teste = instructionToInt & OPCODE_MASK;
         int opCode = (instructionToInt & OPCODE_MASK) >> 18;
         int n = (instructionToInt & N_MASK_24) >> 17;
         int i = (instructionToInt & I_MASK_24) >> 16;
@@ -90,8 +109,8 @@ public class Executor{
 
         switch (opCode) {
             case 0x18:
-                int finalAddress = calcAddress(flags, instruction);
-                
+                computer.writeRegister("A", disp);
+                int finalAddress = calcAddress(computer, flags, disp);
                 break;
             default:
                 break;
@@ -111,12 +130,55 @@ public class Executor{
         int address = instructionToInt & ADDRESS_MASK;
         String flags = "" + n + i + x + b + p + e;
 
+        switch (opCode) {
+            case 0xAA:
+                int finalAddress = calcAddress(computer, flags, address);
+
+                break;
+            default:
+                break;
+        }
 
 
     }
 
-    public static int calcAddress(String flags, String instruction){
-        
+    public static int calcAddress(Computer computer, String flags, int lastBits){
+        switch (flags) {
+            // Endereçamento direto
+            case "110000":
+                return lastBits;
+            case "110001":
+                return lastBits;
+            case "110010":
+                return computer.readRegister("PC") + lastBits;
+            case "110100":
+                return computer.readRegister("B") + lastBits;
+            case "111000":
+                return computer.readRegister("X") + lastBits;
+            case "111001":
+                return computer.readRegister("X") + lastBits;
+            case "111010":
+                return computer.readRegister("B") + lastBits + computer.readRegister("X");
+            case "111100":
+            // Endereçamento indireto
+            case "100000":
+
+            case "100001":
+
+            case "100010":
+
+            case "100100":
+            // Endereçamento imediato
+            case "010000":
+
+            case "010001":
+
+            case "010010":
+
+            case "010100":
+
+            default:
+        }
         return 1;
     }
 
