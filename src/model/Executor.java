@@ -43,9 +43,6 @@ public class Executor{
             int instructionSize = getInstructionSize(instruction);
             
             switch (instructionSize) {
-                /* case 8:
-                    runInstructionFormat1(computer, instruction);
-                    break; */
                 case 16:
                     runInstructionFormat2(computer, instruction);
                     break;
@@ -64,19 +61,6 @@ public class Executor{
             computer.writeRegister("PC", pc);
         }
     }
-
-    /* public static void runInstructionFormat1(Computer computer, String instruction){
-        int instructionToInt = Integer.parseInt(instruction, 16);
-        int opCode = (instructionToInt & OPCODE_8BITS_MASK) >> 8;
-
-        switch (opCode) {
-            case 0x18:
-                
-                break;
-            default:
-                break;
-        }
-    } */
 
     public static void runInstructionFormat2(Computer computer, String instruction){
         int instructionToInt = Integer.parseInt(instruction, 16);
@@ -176,16 +160,23 @@ public class Executor{
 
         switch (opCode) {
             case 0x18: // ADD
-                finalAddress = calcAddress(computer, flags, finalBits);
-                value = computer.readMemory(finalAddress);
-                finalValue = computer.readRegister("A") + value;
-                computer.writeRegister("A", finalValue);
+                if(n != 0 && i != 1){
+                    finalAddress = calcAddress(computer, flags, finalBits);
+                    value = computer.readMemory(finalAddress);
+                    finalValue = computer.readRegister("A") + value;
+                    computer.writeRegister("A", finalValue);
+                    break;
+                }
+                computer.writeRegister("A", finalBits);
                 break;
             case 0x40: // AND
-                finalAddress = calcAddress(computer, flags, finalBits);
-                value = computer.readMemory(finalAddress);
-                finalValue = value & computer.readRegister("A");
-                computer.writeRegister("A", finalValue);
+                if(n != 0 && i != 1){
+                    finalAddress = calcAddress(computer, flags, finalBits);
+                    value = computer.readMemory(finalAddress);
+                    finalValue = value & computer.readRegister("A");
+                    computer.writeRegister("A", finalValue);
+                }
+                computer.writeRegister("A", finalBits);
                 break;
             case 0x28: // COMP
                 finalAddress = calcAddress(computer, flags, finalBits);
@@ -203,12 +194,16 @@ public class Executor{
             case 0x3C: // J
                 finalAddress = calcAddress(computer, flags, finalBits);
                 value = computer.readMemory(finalAddress);
+                if(n != 0 && i != 1)
+                    value = finalBits;
                 computer.writeRegister("PC", value);
                 break;
             case 0x30: // JEQ
                 if(computer.readRegister("SW") == 0x3D){
                     finalAddress = calcAddress(computer, flags, finalBits);
                     value = computer.readMemory(finalAddress);
+                    if(n != 0 && i != 1)
+                        value = finalBits;
                     computer.writeRegister("PC", value);
                 }
                 break;
@@ -216,6 +211,8 @@ public class Executor{
                 if(computer.readRegister("SW") == 0x3E){
                     finalAddress = calcAddress(computer, flags, finalBits);
                     value = computer.readMemory(finalAddress);
+                    if(n != 0 && i != 1)
+                        value = finalBits;
                     computer.writeRegister("PC", value);
                 }
                 break;
@@ -223,12 +220,16 @@ public class Executor{
                 if(computer.readRegister("SW") == 0x3C){
                         finalAddress = calcAddress(computer, flags, finalBits);
                         value = computer.readMemory(finalAddress);
+                        if(n != 0 && i != 1)
+                            value = finalBits;
                         computer.writeRegister("PC", value);
                     }
                 break;
             case 0x48: // JSUB
                 finalAddress = calcAddress(computer, flags, finalBits);
                 value = computer.readMemory(finalAddress);
+                if(n != 0 && i != 1)
+                    value = finalBits;
                 computer.writeRegister("L", computer.readRegister("PC"));
                 computer.writeRegister("PC", value);
 
@@ -250,6 +251,14 @@ public class Executor{
             case 0x20: // MUL
                 break;
             case 0x44: // OR
+                if(n != 0 && i != 1){
+                    finalAddress = calcAddress(computer, flags, finalBits);
+                    value = computer.readMemory(finalAddress);
+                    finalValue = value | computer.readRegister("A");
+                    computer.writeRegister("A", finalValue);
+                    break;
+                }
+                computer.writeRegister("A", finalBits);
                 break;
             case 0x4C: // RSUB
                 computer.writeRegister("PC", computer.readRegister("L"));
@@ -269,14 +278,22 @@ public class Executor{
             case 0x10: // STX
                 break;
             case 0x1C: // SUB
-                finalAddress = calcAddress(computer, flags, finalBits);
-                value = computer.readMemory(finalAddress);
-                finalValue = computer.readRegister("A") - value;
-                computer.writeRegister("A", finalValue);
+                if(n != 0 && i != 1){
+                    finalAddress = calcAddress(computer, flags, finalBits);
+                    value = computer.readMemory(finalAddress);
+                    finalValue = computer.readRegister("A") - value;
+                    computer.writeRegister("A", finalValue);
+                    break;
+                }
+                computer.writeRegister("A", finalBits);
                 break;
             case 0x2C: // TIX
                 finalAddress = calcAddress(computer, flags, finalBits);
                 value = computer.readMemory(finalAddress);
+
+                if(n != 0 && i != 1)
+                    value = finalBits;
+                
                 if(value > computer.readRegister("X"))
                     computer.writeRegister("SW", 0x3C);
                 else if(value < computer.readRegister("X"))
