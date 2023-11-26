@@ -250,6 +250,10 @@ public class Executor{
             case 0x20: // MUL
                 break;
             case 0x44: // OR
+                finalAddress = calcAddress(computer, flags, finalBits);
+                value = computer.readMemory(finalAddress);
+                finalValue = value | computer.readRegister("A");
+                computer.writeRegister("A", finalValue);
                 break;
             case 0x4C: // RSUB
                 computer.writeRegister("PC", computer.readRegister("L"));
