@@ -18,9 +18,8 @@ public class Computer {
     }
 
     public int readMemory(String address){
-        if(memory.containsKey(address)){
+        if(memory.containsKey(address))
             return memory.get(address);
-        }
         System.err.println("Erro: Endereço invalido: " + address);
         return -100;
         

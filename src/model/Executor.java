@@ -61,7 +61,7 @@ public class Executor{
             }
 
             pc++;
-            computer.writeRegister("SW", pc);
+            computer.writeRegister("PC", pc);
         }
     }
 
@@ -85,13 +85,11 @@ public class Executor{
         int r2 = instructionToInt & R1_MASK;
 
         switch (opCode) {
-            case 0x18:
-                
+            case 0x18;
                 break;
             default:
                 break;
         }
-
     }
 
     public static void runInstructionFormat3(Computer computer, String instruction){
@@ -110,7 +108,7 @@ public class Executor{
         switch (opCode) {
             case 0x18:
                 computer.writeRegister("A", disp);
-                int finalAddress = calcAddress(computer, flags, disp);
+                String finalAddress = calcAddress(computer, flags, disp);
                 break;
             default:
                 break;
@@ -131,9 +129,9 @@ public class Executor{
         String flags = "" + n + i + x + b + p + e;
 
         switch (opCode) {
-            case 0xAA:
-                int finalAddress = calcAddress(computer, flags, address);
-
+            case 0x18:
+                String finalAddress = calcAddress(computer, flags, address);
+                
                 break;
             default:
                 break;
@@ -142,44 +140,76 @@ public class Executor{
 
     }
 
-    public static int calcAddress(Computer computer, String flags, int lastBits){
+    public static String calcAddress(Computer computer, String flags, int lastBits){
+        String finalAddress;
+        String midAddress;
+        int calc;
         switch (flags) {
             // Endereçamento direto
             case "110000":
-                return lastBits;
+                finalAddress = String.format("0x03X", lastBits);
+                return finalAddress;
             case "110001":
-                return lastBits;
+                finalAddress = String.format("0x03X", lastBits);
+                return finalAddress;
             case "110010":
-                return computer.readRegister("PC") + lastBits;
+                calc = computer.readRegister("PC") + lastBits;
+                finalAddress = String.format("0x03X", calc);
+                return finalAddress;
             case "110100":
-                return computer.readRegister("B") + lastBits;
+                calc = computer.readRegister("B") + lastBits;
+                finalAddress = String.format("0x03X", calc);
+                return finalAddress;
             case "111000":
-                return computer.readRegister("X") + lastBits;
+                calc = computer.readRegister("X") + lastBits;
+                finalAddress = String.format("0x03X", calc);
+                return finalAddress;
             case "111001":
-                return computer.readRegister("X") + lastBits;
+                calc = computer.readRegister("X") + lastBits;
+                finalAddress = String.format("0x03X", calc);
+                return finalAddress;
             case "111010":
-                return computer.readRegister("B") + lastBits + computer.readRegister("X");
+                calc = computer.readRegister("PC") + lastBits + computer.readRegister("X");
+                finalAddress = String.format("0x03X", calc);
+                return finalAddress;
             case "111100":
+                calc = computer.readRegister("B") + lastBits + computer.readRegister("X");
+                finalAddress = String.format("0x03X", calc);
+                return finalAddress;
             // Endereçamento indireto
             case "100000":
-
+                midAddress = String.format("0x03X", lastBits);
+                finalAddress = String.format("0x03X", computer.readMemory(midAddress));
+                return finalAddress;
             case "100001":
-
+                midAddress = String.format("0x03X", lastBits);
+                finalAddress = String.format("0x03X", computer.readMemory(midAddress));
+                return finalAddress;
             case "100010":
-
+                calc = computer.readRegister("PC") + lastBits;
+                midAddress = String.format("0x03X", calc);
+                finalAddress = String.format("0x03X", computer.readMemory(midAddress));
+                return finalAddress;
             case "100100":
+                calc = computer.readRegister("B") + lastBits;
+                midAddress = String.format("0x03X", calc);
+                finalAddress = String.format("0x03X", computer.readMemory(midAddress));
             // Endereçamento imediato
             case "010000":
-
+                return String.format("0x03X", lastBits);
             case "010001":
-
+                return String.format("0x03X", lastBits);
             case "010010":
-
+                calc = computer.readRegister("PC") + lastBits;
+                return String.format("0x03X", lastBits);
             case "010100":
-
+                calc = computer.readRegister("PC") + lastBits;
+                return String.format("0x03X", lastBits);
             default:
+                System.out.println("Flags não encontradas: " + flags);
+                break;
         }
-        return 1;
+        return "-100";
     }
 
     public static int getInstructionSize(String instruction){
