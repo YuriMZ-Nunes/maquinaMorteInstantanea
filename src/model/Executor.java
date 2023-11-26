@@ -43,9 +43,6 @@ public class Executor{
             int instructionSize = getInstructionSize(instruction);
             
             switch (instructionSize) {
-                /* case 8:
-                    runInstructionFormat1(computer, instruction);
-                    break; */
                 case 16:
                     runInstructionFormat2(computer, instruction);
                     break;
@@ -64,19 +61,6 @@ public class Executor{
             computer.writeRegister("PC", pc);
         }
     }
-
-    /* public static void runInstructionFormat1(Computer computer, String instruction){
-        int instructionToInt = Integer.parseInt(instruction, 16);
-        int opCode = (instructionToInt & OPCODE_8BITS_MASK) >> 8;
-
-        switch (opCode) {
-            case 0x18:
-                
-                break;
-            default:
-                break;
-        }
-    } */
 
     public static void runInstructionFormat2(Computer computer, String instruction){
         int instructionToInt = Integer.parseInt(instruction, 16);
