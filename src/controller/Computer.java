@@ -59,10 +59,8 @@ public class Computer {
     public void createMemory(Map<String, Integer> memory){
         for(int i = 1; i <= 0xFFF; i++){
             String position = String.format("0x%03X", i);
-            memory.put(position, i);
+            memory.put(position, 0);
         }
-        memory.put("0x001", 2);
-        memory.put("0x002", 50);
     }
 
     public void createRegisters(Map<String, Integer> registers){
