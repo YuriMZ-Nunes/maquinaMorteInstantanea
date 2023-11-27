@@ -477,20 +477,6 @@ public class Executor{
                 calc = computer.readRegister("B") + lastBits;
                 midAddress = String.format("0x%03X", calc);
                 finalAddress = String.format("0x%03X", computer.readMemory(midAddress));
-            // Endereçamento imediato
-            case "010000":
-                return String.format("0x%03X", lastBits);
-            case "010001":
-                return String.format("0x%03X", lastBits);
-            case "010010":
-                calc = computer.readRegister("PC") + lastBits;
-                return String.format("0x%03X", lastBits);
-            case "010100":
-                calc = computer.readRegister("PC") + lastBits;
-                return String.format("0x%03X", lastBits);
-            default:
-                System.out.println("Flags não encontradas: " + flags);
-                break;
         }
         return "-100";
     }
