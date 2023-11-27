@@ -196,7 +196,17 @@ public class Executor{
                 else
                     computer.writeRegister("SW", 0x3D);
                 break;
-            case 0x24: // DIV
+            case 0x24: // DIV 
+                if(n == 0 && i == 1){
+                    finalValue = (int)(computer.readRegister("A") / finalBits); //    pega a parte inteira da divisão
+                computer.writeRegister("A", finalValue);
+                    computer.writeRegister("A", finalValue);
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                value = computer.readMemory(finalAddress);
+                finalValue = (int)(computer.readRegister("A") / value); //    pega a parte inteira da divisão
+                computer.writeRegister("A", finalValue);
                 break; 
             case 0x3C: // J
                 finalAddress = calcAddress(computer, flags, finalBits);
@@ -260,16 +270,54 @@ public class Executor{
                 computer.writeRegister("B", value);
                 break;
             case 0x50: // LDCH
+                
                 break;
             case 0x08: // LDL
+                if(n == 0 && i == 1){
+                    computer.writeRegister("L", finalBits);
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                value = computer.readMemory(finalAddress);
+                computer.writeRegister("L", value);
                 break;
             case 0x6C: // LDS
+                if(n == 0 && i == 1){
+                    computer.writeRegister("S", finalBits);
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                value = computer.readMemory(finalAddress);
+                computer.writeRegister("S", value);
                 break;
             case 0x74: // LDT
+                if(n == 0 && i == 1){
+                    computer.writeRegister("T", finalBits);
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                value = computer.readMemory(finalAddress);
+                computer.writeRegister("T", value);
                 break;
             case 0x04: // LDX
+                if(n == 0 && i == 1){
+                    computer.writeRegister("X", finalBits);
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                value = computer.readMemory(finalAddress);
+                computer.writeRegister("X", value);
                 break;
             case 0x20: // MUL
+                if(n == 0 && i == 1){
+                    finalValue = computer.readRegister("A") * finalBits;
+                    computer.writeRegister("A", finalValue);
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                value = computer.readMemory(finalAddress);
+                finalValue = computer.readRegister("A") * value;
+                computer.writeRegister("A", finalValue);
                 break;
             case 0x44: // OR
                 if(n == 0 && i == 1){
@@ -303,14 +351,43 @@ public class Executor{
                 computer.writeMemory(finalAddress, computer.readRegister("B"));
                 break;
             case 0x54: // STCH
+
                 break;
             case 0x14: // STL
+                if(n == 0 && i == 1){
+                    finalAddress = String.format("0x%03X", finalBits);
+                    computer.writeMemory(finalAddress, computer.readRegister("L"));
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                computer.writeMemory(finalAddress, computer.readRegister("L"));
                 break;
             case 0x7C: // STS
+                if(n == 0 && i == 1){
+                    finalAddress = String.format("0x%03X", finalBits);
+                    computer.writeMemory(finalAddress, computer.readRegister("S"));
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                computer.writeMemory(finalAddress, computer.readRegister("S"));
                 break;
             case 0x84: // STT
+                if(n == 0 && i == 1){
+                    finalAddress = String.format("0x%03X", finalBits);
+                    computer.writeMemory(finalAddress, computer.readRegister("T"));
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                computer.writeMemory(finalAddress, computer.readRegister("T"));
                 break;
             case 0x10: // STX
+                if(n == 0 && i == 1){
+                    finalAddress = String.format("0x%03X", finalBits);
+                    computer.writeMemory(finalAddress, computer.readRegister("X"));
+                    break;
+                }
+                finalAddress = calcAddress(computer, flags, finalBits);
+                computer.writeMemory(finalAddress, computer.readRegister("X"));
                 break;
             case 0x1C: // SUB
                 if(n == 0 && i == 1){
