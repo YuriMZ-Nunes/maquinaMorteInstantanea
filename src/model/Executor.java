@@ -199,7 +199,6 @@ public class Executor{
             case 0x24: // DIV 
                 if(n == 0 && i == 1){
                     finalValue = (int)(computer.readRegister("A") / finalBits); //    pega a parte inteira da divisão
-                computer.writeRegister("A", finalValue);
                     computer.writeRegister("A", finalValue);
                     break;
                 }
@@ -391,7 +390,8 @@ public class Executor{
                 break;
             case 0x1C: // SUB
                 if(n == 0 && i == 1){
-                    computer.writeRegister("A", finalBits);
+                    value = computer.readRegister("A") - finalBits;
+                    computer.writeRegister("A", value);
                     break;
                 }
                 finalAddress = calcAddress(computer, flags, finalBits);
