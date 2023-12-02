@@ -4,6 +4,11 @@ import java.awt.*;
 
 public class MainGUI extends JFrame {
 
+    LeftUpper panelLeftUpper;
+    RightUpper panelRightUpper;
+    LeftLower panelLeftLower;
+    RightLower panelRightLower;
+
     public MainGUI() {
         setTitle("Interface");
         setSize(500, 500);
@@ -13,25 +18,25 @@ public class MainGUI extends JFrame {
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        LeftUpper panelLeftUpper = new LeftUpper();
+        panelLeftUpper = new LeftUpper();
             gbc.gridx = 0;
             gbc.gridy = 0;
             //LeftUpper.configure(panelLeftUpper);
             add(panelLeftUpper, gbc);
 
-        RightUpper panelRightUpper = new RightUpper();
+        panelRightUpper = new RightUpper();
             gbc.gridx = 1;
             gbc.gridy = 0;
             //RightUpper.configure(panelRightUpper);
             add(panelRightUpper, gbc);
         
-        LeftLower panelLeftLower = new LeftLower();
+        panelLeftLower = new LeftLower();
             gbc.gridx = 0;
             gbc.gridy = 1;
             //LeftLower.configure(panelLeftLower);
             add(panelLeftLower, gbc);
 
-        RightLower panelRightLower = new RightLower();
+        panelRightLower = new RightLower();
             gbc.gridx = 1;
             gbc.gridy = 1;
             //RightLower.configure(panelRightLower);
