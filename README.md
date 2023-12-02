@@ -8,23 +8,20 @@ Repositório do trabalho de Programação de Sistemas
 
 - Yuri de Melo Zorzoli Nunes
 - Gabriel Gonzaga Seabra Câmara
-- Nome
-- Nome
-- Nome
-- Nome
-- Nome
-- Nome
+- Vinícius Hallmann
+- João Vitor Laimer
+- Andersson De Souza Silveira
+- Kalani Sosa
+- Eduardo Figueiredo Costa
+- Franklin Sales
 
 ## Requisitos
 
 **GIT**  
 Windows: https://gitforwindows.org/  
 Linux: https://book.git-scm.com/download/linux  
-**Extensão Java para VS Code que deixa melhor que o NetBeans confia**  
+**Extensão Java para VS Code que deixa melhor que o NetBeans**  
 https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack  
-**Bibliotecas**  
-\*\*ainda n tem 😇😇  
-e por enquanto é isso eu acho
 
 ## Guia geral
 
