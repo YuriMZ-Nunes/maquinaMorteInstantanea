@@ -10,7 +10,7 @@ public class Loader {
         int address = 0;
 
         while((line = reader.readLine()) != null){
-            computer.writeInstructionsMemory(address, line);
+            computer.writeMemory(address, line);
             address++;
         }
 
