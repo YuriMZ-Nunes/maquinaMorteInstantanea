@@ -13,29 +13,29 @@ public class MainGUI extends JFrame {
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JPanel panelLeftUpper = new JPanel(new GridLayout(1,1));
+        LeftUpper panelLeftUpper = new LeftUpper();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            LeftUpper.configure(panelLeftUpper);
+            //LeftUpper.configure(panelLeftUpper);
             add(panelLeftUpper, gbc);
 
-        JPanel panelRightUpper = new JPanel(new GridLayout(1,1));
+        RightUpper panelRightUpper = new RightUpper();
             gbc.gridx = 1;
             gbc.gridy = 0;
-            RightUpper.configure(panelRightUpper);
+            //RightUpper.configure(panelRightUpper);
             add(panelRightUpper, gbc);
         
-        JPanel panelLeftLower = new JPanel(new GridLayout(1,1));
+        LeftLower panelLeftLower = new LeftLower();
             gbc.gridx = 0;
             gbc.gridy = 1;
-            LeftLower.configure(panelLeftLower);
+            //LeftLower.configure(panelLeftLower);
             add(panelLeftLower, gbc);
 
-        JPanel panelRightLower = new JPanel(new GridLayout(1,1));
+        RightLower panelRightLower = new RightLower();
             gbc.gridx = 1;
             gbc.gridy = 1;
-            RightLower.configure(panelRightLower);
-            add(panelRightLower, gbc);            
+            //RightLower.configure(panelRightLower);
+            add(panelRightLower, gbc);              
 
     }
 

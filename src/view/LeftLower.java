@@ -1,16 +1,23 @@
 package view;
 import javax.swing.*;
+import java.awt.*;
 
+public class LeftLower extends JPanel{
+ 
+    JTextArea textAreaOutput;
 
-public class LeftLower {
-    public static void configure(JPanel panel) {
-        panel.setBorder(BorderFactory.createTitledBorder("Output"));
-        JTextArea textAreaOutput = new JTextArea();
+    public LeftLower()
+    {
+        setLayout(new GridLayout(1,1));
+
+        setBorder(BorderFactory.createTitledBorder("Output"));
+
+        textAreaOutput = new JTextArea();
             textAreaOutput.setLineWrap(true);
             textAreaOutput.setEditable(false);
             JScrollPane scrollPane = new JScrollPane(textAreaOutput);
                 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        panel.add(scrollPane);
+        add(scrollPane);
     }
 }

@@ -8,29 +8,34 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class LeftUpper {
-    
-    public static void configure(JPanel panel) {
+public class LeftUpper extends JPanel {
+    JButton btnLoad;
+    JButton btnExec;
+    JTextArea textAreaInput;
+
+    public LeftUpper() {
+        setLayout(new GridLayout(1,1));
+
         GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         gbl.rowHeights = new int[] { 50, 50 };
         gbl.columnWidths = new int[] { 50, 100 };
-        panel.setBorder(BorderFactory.createTitledBorder("Arquivo"));
-        panel.setLayout(gbl);
+        setBorder(BorderFactory.createTitledBorder("Arquivo"));
+        setLayout(gbl);
 
-        JButton btnLoad = new JButton("Carregar");
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        panel.add(btnLoad, gbc);
+        btnLoad = new JButton("Carregar");
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.NORTHWEST;
+        add(btnLoad, gbc);
 
-        JButton btnExec = new JButton("Executar");
-        btnExec.setEnabled(false);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panel.add(btnExec, gbc);
+        btnExec = new JButton("Executar");
+            btnExec.setEnabled(false);
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+        add(btnExec, gbc);
 
-        JTextArea textAreaInput = new JTextArea();
+        textAreaInput = new JTextArea();
             JScrollPane scrollPane = new JScrollPane(textAreaInput);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
                 gbc.gridx = 1;
@@ -41,7 +46,8 @@ public class LeftUpper {
                 gbc.fill = GridBagConstraints.BOTH;
                 textAreaInput.setLineWrap(true);
             scrollPane.setPreferredSize(new Dimension(50, 200));
-        panel.add(scrollPane, gbc);
+        add(scrollPane, gbc);
+
         configureLoadAction(btnLoad, btnExec, textAreaInput);
         configureExecAction(btnExec, textAreaInput);
     }
