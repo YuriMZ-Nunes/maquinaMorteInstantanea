@@ -17,14 +17,5 @@ public class App {
                 interfaceSwing.setVisible(true);
             }
         });
-        
-        /*
-        try {
-            Loader.loadProgram(computer, "lib/program.txt");
-            Executor.executeProgram(computer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 }

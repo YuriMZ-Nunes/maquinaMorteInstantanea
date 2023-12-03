@@ -113,8 +113,10 @@ public class InterfaceSwing extends JFrame {
             model.addColumn("Endereço");
             model.addColumn("Valor");
 
+        /*
         for (int i = 0; i < 100; i++) 
             model.addRow(new Object[]{"0x00"+i, i+1024+""+i+128});
+        */
 
         JTable table = new JTable(model);
             table.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -172,6 +174,8 @@ public class InterfaceSwing extends JFrame {
             public void actionPerformed(ActionEvent e){
                 System.out.println(file.toString());
                 String locationTxt = file.toString();
+                //Ta dando erro, n sei se era pra ser dessa forma
+                /*
                 try {
                     Loader.loadProgram(C, "lib/program.txt");
                     Executor.executeProgram(C);
@@ -179,10 +183,17 @@ public class InterfaceSwing extends JFrame {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-            }
+                */
+                updateTable(model);
+            } 
         });
     }
 
+    void updateTable(DefaultTableModel model){
+        for (int i = 0; i < 100; i++) 
+            model.addRow(new Object[]{"0x00"+i, i+1024+""+i+128});
+    }
+/* 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -193,6 +204,7 @@ public class InterfaceSwing extends JFrame {
             }
         });
     }
+*/
 }
 
 
