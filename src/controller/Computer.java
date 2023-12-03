@@ -1,7 +1,6 @@
 package controller;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -90,7 +89,6 @@ public class Computer {
             String position = String.format("0x%03X", i);
             memory.put(position, 0);
         }
-        System.out.println(memory);
     }
     //  responsável por incializar os registradores da máquina
     //  recebe como parametro um mapa que representa os registradores

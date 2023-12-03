@@ -1,10 +1,8 @@
 package model;
-//import java.io.IOException;
 
 import javax.swing.SwingUtilities;
 
 import controller.Computer;
-//import controller.Loader;
 import view.*;
 
 public class App {
