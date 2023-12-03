@@ -20,7 +20,7 @@ public class Computer {
     //  idem á estrutura acima
     //  Contudo, escolhe-se a HashMap pela a efiência no tempo médio de acesso para buscar valores por chave.
     //  Ele não mantém a ordem de inserção dos elementos
-    public static Map<String, Integer> registers = new HashMap<>();
+    public static Map<String, Integer> registers = new LinkedHashMap<>();
 
     //  implementação do construtor da classe Computer
     //  inicializa o array instructionsMemory com tamanho fixo de 1000 elementos
