@@ -150,5 +150,11 @@ public class Computer {
         return false;
     }
 
+    public static Map<String, Integer> getMemory() {
+        return memory;
+    }
     
+    public static Map<String, Integer> getRegisters() {
+        return registers;
+    }
 }
