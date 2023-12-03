@@ -496,13 +496,13 @@ public class Executor{
     }
 
     public static int getInstructionSize(String instruction){
-        StringBuilder binary = new StringBuilder();
-        for(int i = 0; i < instruction.length(); i++){
+        StringBuilder binary = new StringBuilder(); //  cria uma var stringbuild 
+        for(int i = 0; i < instruction.length(); i++){  // laço para converter o 
             String binSegment = Integer.toBinaryString(Integer.parseInt(instruction.substring(i, i + 1), 16));
             binSegment = "0000" + binSegment;
             binary.append(binSegment.substring(binSegment.length() - 4));
         }
-        int size = binary.toString().length();
+        int size = binary.toString().length(); 
         if(size == 20)
             size += 4;
         return size;

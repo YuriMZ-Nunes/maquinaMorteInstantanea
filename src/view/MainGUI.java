@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class MainGUI extends JFrame {
 
-    public MainGUI() {
+    public MainGUI(LeftUpper leftUpper) {
         setTitle("Interface");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +42,7 @@ public class MainGUI extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MainGUI main = new MainGUI();
+                MainGUI main = new MainGUI(new LeftUpper());
                 main.setVisible(true);
             }
         });

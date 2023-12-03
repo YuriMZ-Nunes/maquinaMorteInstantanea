@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class LeftUpper {
-    
     public static void configure(JPanel panel) {
         GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
