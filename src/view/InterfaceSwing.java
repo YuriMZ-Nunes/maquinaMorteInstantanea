@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -20,7 +20,6 @@ import model.*;
 public class InterfaceSwing extends JFrame {
 
     public InterfaceSwing(Computer C) {
-        Computer system = C;
 
         // Configurações da janela principal
         setTitle("Interface Swing");
@@ -186,8 +185,8 @@ public class InterfaceSwing extends JFrame {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                StringBuilder update = new StringBuilder();
-                StringBuilder address = new StringBuilder();
+                //StringBuilder update = new StringBuilder();
+                //StringBuilder address = new StringBuilder();
 
                 // Atualiza a GUI
                 Map<String, Integer> memoryTable = new LinkedHashMap<>();
