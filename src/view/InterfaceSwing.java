@@ -77,14 +77,14 @@ public class InterfaceSwing extends JFrame {
         for (int i = 0; i < registerValues.length; i++)
             registerValues[i] = new JLabel("Valor");
 
-        registerLabels[0] = new JLabel("A:");
-        registerLabels[1] = new JLabel("X:");
-        registerLabels[2] = new JLabel("L:");
-        registerLabels[3] = new JLabel("B:");
-        registerLabels[4] = new JLabel("S:");
-        registerLabels[5] = new JLabel("T:");
-        registerLabels[6] = new JLabel("PC:");
-        registerLabels[7] = new JLabel("SW:");
+        registerLabels[0] = new JLabel("R1");
+        registerLabels[1] = new JLabel("R2");
+        registerLabels[2] = new JLabel("R3");
+        registerLabels[3] = new JLabel("R4");
+        registerLabels[4] = new JLabel("R5");
+        registerLabels[5] = new JLabel("R6");
+        registerLabels[6] = new JLabel("R7");
+        registerLabels[7] = new JLabel("R8");
 
         for (int i = 0; i < registerLabels.length; i++) {
             panelSuperiorDireito.add(registerLabels[i]);
@@ -196,7 +196,7 @@ public class InterfaceSwing extends JFrame {
 
                 Map<String, Integer> registers = new LinkedHashMap<>();
                 registers = Computer.getRegisters();
-                updateRegisters(registerValues, registers);
+                updateRegisters(registerLabels,registerValues, registers);
             } 
         });
     }
@@ -210,10 +210,11 @@ public class InterfaceSwing extends JFrame {
             model.addRow(row);
         }
     }
-    void updateRegisters(JLabel [] registers,Map <String, Integer> values){
+    void updateRegisters(JLabel [] resgisterLabels,JLabel [] registersValues,Map <String, Integer> values){
         int i = 0;
         for (Map.Entry<String,Integer> entry : values.entrySet()){
-            registers[i].setText(entry.getValue().toString());
+            resgisterLabels[i].setText(entry.getKey().toString());
+            registersValues[i].setText(entry.getValue().toString());
             i++;
         }
     }
