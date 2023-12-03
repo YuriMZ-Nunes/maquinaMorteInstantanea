@@ -32,17 +32,21 @@ public class Executor{
     static int R2_MASK = 0x000F;
     static boolean isRunning = true;
 
+    //  responsável por executar o programa armazenado na memória da máquina
     public static void executeProgram(Computer computer){
-        
+        //  inicializa o contador com zero
         int pc = 0;
         computer.writeRegister("PC", pc);
         
-        
+        //  inicializa um laço que continuará executando enquanto a var isRunning for verdadeira
         while (isRunning) {
+            //  lê o valor atual de PC 
             pc = computer.readRegister("PC");
+            //  lê a instrução na posição indicada pelo PC
             String instruction = computer.readInstructionsMemory(pc);
+            //  determina o tamanho da instrução lida
             int instructionSize = getInstructionSize(instruction);
-            
+            //  com base no tamanho da instrução, o codigo executa de forma diferente
             switch (instructionSize) {
                 case 16:
                     runInstructionFormat2(computer, instruction);
@@ -57,22 +61,29 @@ public class Executor{
                     System.out.println("Formato da seguinte instrução invalido: " + instruction);
                     break;
             }
-
+            //  incrementa o contador de programa para apontar para próxima instrução
             pc++;
+            //  escreve no mapa de registrador o incremento 
             computer.writeRegister("PC", pc);
         }
     }
-
+    //  executa uma instrução do formato 2 na máquina
+    //  recebe o computer e a instruction
     public static void runInstructionFormat2(Computer computer, String instruction){
-        int instructionToInt = Integer.parseInt(instruction, 16);
+        //  converte a String instruction para inteiro na base decimal
+        int instructionToInt = Integer.parseInt(instruction, 16); //    o nº 16 indica que instruction está na base hexadecimal
+        //  extração de Campos
+        //  isola os 8 bits mais significativo para o opocode
         int opCode = (instructionToInt & OPCODE_8BITS_MASK) >> 8;
+        //  isola os 4 bits intermediários para obter o registrador 1
         int r1 = (instructionToInt & R1_MASK) >> 4;
+        //  isola os 4 bits menos significativos para obter o registrador 2
         int r2 = instructionToInt & R2_MASK;
-
+        //  os nº são convertidos em chaves legíveis para acessar o mapa de registradores
         String r1Key = getRegisterKey(r1);        
         String r2Key = getRegisterKey(r2);
 
-        
+        //  Aqui ocorre as operações identificadas pelo opcodes
         switch (opCode) {
             case 0x90: // ADDR
                 int addR = computer.readRegister(r1Key) + computer.readRegister(r2Key);
@@ -133,12 +144,16 @@ public class Executor{
     }
 
     public static void runInstructionFormat3And4(Computer computer, String instruction){
+        //  converte a String instruction para inteiro na base decimal
         int instructionToInt = Integer.parseInt(instruction, 16);
         int n, i, x, b, p, e, opCode, finalBits;
         String finalAddress;
         int value, finalValue;
+        //  determina o tamanho da instrução 24 ou 32
         if(getInstructionSize(instruction) == 24){
-            opCode = (instructionToInt & OPCODE_MASK) >> 18;
+            //  se a instrução é 24 bits, os campos n, i, x, b, p, e, opCode, finalBits; 
+            //  são extraídos usando operações bitwise ("&"e">>") 
+            opCode = (instructionToInt & OPCODE_MASK) >> 18; // move os bits selecionados para a direita
             n = (instructionToInt & N_MASK_24) >> 17;
             i = (instructionToInt & I_MASK_24) >> 16;
             x = (instructionToInt & X_MASK_24) >> 15;
@@ -146,6 +161,10 @@ public class Executor{
             p = (instructionToInt & P_MASK_24) >> 13;
             e = (instructionToInt & E_MASK_24) >> 12;
             finalBits = instructionToInt & DISP_MASK; // DISP
+            //  se tivermos um valor inteiro 5, que em binário é 101, e uma máscara de bits 3, 
+            //  que em binário é 011, ao realizar a operação 5 & 3 (E lógico bit a bit), 
+            //  o resultado será 1, que em binário é 001. Isso ocorre porque o & lógico compara cada 
+            //  bit correspondente e retorna 1 somente se ambos os bits forem 1.
         } else {
             opCode = (instructionToInt & OPCODE_MASK) >> 26;
             n = (instructionToInt & N_MASK_32) >> 25;
@@ -154,7 +173,7 @@ public class Executor{
             b = (instructionToInt & B_MASK_32) >> 22;
             p = (instructionToInt & P_MASK_32) >> 21;
             e = (instructionToInt & E_MASK_32) >> 20;
-            finalBits = instructionToInt & ADDRESS_MASK;
+            finalBits = instructionToInt & ADDRESS_MASK; // address
         }
 
         String flags = "" + n + i + x + b + p + e;
@@ -169,9 +188,13 @@ public class Executor{
                     computer.writeRegister("A", finalValue);
                     break;
                 }
+                //  encontra o endereço 
                 finalAddress = calcAddress(computer, flags, finalBits);
+                // passa o conteudo do endereço para a var value
                 value = computer.readMemory(finalAddress);
+                //  soma o value com registrador A
                 finalValue = computer.readRegister("A") + value;
+                //  escreve no registrador A o finalvalue
                 computer.writeRegister("A", finalValue);
                 break;
             case 0x40: // AND
@@ -421,12 +444,12 @@ public class Executor{
         }
 
     }
-    
-
+    //  calcula o endereço de memória com base em diferentes modos de endereçamento 
     public static String calcAddress(Computer computer, String flags, int lastBits){
         String finalAddress;
         String midAddress;
         int calc;
+        
         switch (flags) {
             // Endereçamento direto
             case "110000":
