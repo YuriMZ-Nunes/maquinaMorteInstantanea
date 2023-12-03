@@ -9,6 +9,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Vector;
+
 import controller.*;
 import model.*;
 
@@ -174,24 +179,43 @@ public class InterfaceSwing extends JFrame {
             public void actionPerformed(ActionEvent e){
                 System.out.println(file.toString());
                 String locationTxt = file.toString();
-                //Ta dando erro, n sei se era pra ser dessa forma
-                /*
                 try {
-                    Loader.loadProgram(C, "lib/program.txt");
+                    Loader.loadProgram(C, locationTxt);
                     Executor.executeProgram(C);
                     System.out.println("Loader carregado com sucesso!");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                */
-                updateTable(model);
+                StringBuilder update = new StringBuilder();
+                StringBuilder address = new StringBuilder();
+
+                // Atualiza a GUI
+                Map<String, Integer> memoryTable = new LinkedHashMap<>();
+                memoryTable = Computer.getMemory();
+                updateTable(model,memoryTable);
+
+                Map<String, Integer> registers = new LinkedHashMap<>();
+                registers = Computer.getRegisters();
+                updateRegisters(registerValues, registers);
             } 
         });
     }
 
-    void updateTable(DefaultTableModel model){
-        for (int i = 0; i < 100; i++) 
-            model.addRow(new Object[]{"0x00"+i, i+1024+""+i+128});
+    //Joga o hashMap pra tabela da GUI
+    void updateTable(DefaultTableModel model,Map <String,Integer> update){
+        for (Map.Entry<String,Integer> entry : update.entrySet()){
+            Vector <Object> row = new Vector<>();
+            row.add(entry.getKey());
+            row.add(entry.getValue());
+            model.addRow(row);
+        }
+    }
+    void updateRegisters(JLabel [] registers,Map <String, Integer> values){
+        int i = 0;
+        for (Map.Entry<String,Integer> entry : values.entrySet()){
+            registers[i].setText(entry.getValue().toString());
+            i++;
+        }
     }
 /* 
     public static void main(String[] args) {
