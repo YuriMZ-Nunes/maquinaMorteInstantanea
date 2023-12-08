@@ -23,6 +23,11 @@ Linux: https://book.git-scm.com/download/linux
 **Extensão Java para VS Code que deixa melhor que o NetBeans**  
 https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack  
 
+##Vídeos
+
+**PRIMEIRO CHECKPOINT**
+https://drive.google.com/file/d/1mcEeP3q2d0KgmVtfw20LqSFXWKu5wHX6/view?usp=sharing
+
 ## Guia geral
 
 **Links úteis**  
